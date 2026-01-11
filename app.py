@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import subprocess
+import uuid
 from jinja2 import Environment, FileSystemLoader
 
 # Configuração da página
@@ -9,6 +10,8 @@ st.set_page_config(page_title="Gerador de Currículos", page_icon="📄", layout
 st.title("📄 Gerador de Currículo")
 st.markdown("""
 Preencha os campos abaixo para gerar um currículo profissional.
+
+Atenção: Seus dados são processados apenas na memória temporária para gerar o PDF e são descartados imediatamente. Nenhuma informação é salva em banco de dados.
 """)
 
 # --- INICIALIZAÇÃO DO ESTADO ---
@@ -23,12 +26,12 @@ cor_escolhida = st.color_picker("Selecione uma cor de destaque (opcional):", "#0
 
 col1, col2 = st.columns(2)
 with col1:
-    nome = st.text_input("Nome Completo", placeholder="Ex:MARIA DA SILVA")
-    email = st.text_input("Email", placeholder="Ex:maria@email.com")
+    nome = st.text_input("Nome Completo", placeholder="Ex: MARIA DA SILVA")
+    email = st.text_input("Email", placeholder="Ex: maria@email.com")
     telefone = st.text_input("Telefone", placeholder="Ex: (11) 99999-9999")
 with col2:
     titulo = st.text_input("Título Profissional", placeholder="Ex: Engenheira Civil")
-    localizacao = st.text_input("Cidade, UF", placeholder="Ex:São Paulo, SP")
+    localizacao = st.text_input("Cidade, UF", placeholder="Ex: São Paulo, SP")
     linkedin = st.text_input("LinkedIn", placeholder="Ex: linkedin.com/in/maria")
 
 resumo = st.text_area("Resumo Profissional", placeholder="Ex: Profissional com sólida experiência em...")
@@ -165,7 +168,6 @@ if st.button("GERAR CURRÍCULO EM PDF", type="primary"):
             "cor": cor_latex,
             "nome": nome,
             "titulo": titulo,
-            # Passamos o email normal
             "email": email, 
             "telefone": telefone,
             "localizacao": localizacao,
@@ -189,15 +191,22 @@ if st.button("GERAR CURRÍCULO EM PDF", type="primary"):
             comment_end_string='}',
         )
 
+        # Gera ID único para os arquivos desta execução
+        session_id = str(uuid.uuid4())
+        arquivo_tex = f"cv_{session_id}.tex"
+        arquivo_pdf = f"cv_{session_id}.pdf"
+
         try:
             template = env.get_template('template.tex')
             latex_renderizado = template.render(dados=dados)
 
-            with open('temp_cv.tex', 'w', encoding='utf-8') as f:
+            # Salva com nome único
+            with open(arquivo_tex, 'w', encoding='utf-8') as f:
                 f.write(latex_renderizado)
 
+            # Compila o arquivo único
             process = subprocess.run(
-                ["pdflatex", "-interaction=nonstopmode", "temp_cv.tex"], 
+                ["pdflatex", "-interaction=nonstopmode", arquivo_tex], 
                 capture_output=True
             )
 
@@ -206,13 +215,20 @@ if st.button("GERAR CURRÍCULO EM PDF", type="primary"):
                 st.code(process.stdout.decode('latin-1')[-1500:])
             else:
                 st.success("Sucesso! Baixe seu currículo abaixo:")
-                with open("temp_cv.pdf", "rb") as pdf_file:
+                # Lê o PDF gerado
+                with open(arquivo_pdf, "rb") as pdf_file:
                     st.download_button(
                         label="⬇️ Baixar PDF",
                         data=pdf_file,
                         file_name=f"Curriculo_{nome.replace(' ', '_')}.pdf",
                         mime="application/pdf"
                     )
+            
+            # Limpeza
+            arquivos_para_apagar = [arquivo_tex, arquivo_pdf, f"cv_{session_id}.log", f"cv_{session_id}.aux", f"cv_{session_id}.out"]
+            for arq in arquivos_para_apagar:
+                if os.path.exists(arq):
+                    os.remove(arq)
 
         except Exception as e:
             st.error(f"Erro: {e}")
