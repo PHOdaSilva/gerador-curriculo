@@ -1,0 +1,131 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+
+% Tipografia Limpa
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{xcolor}
+\usepackage{dashrule}
+\usepackage{titlesec}
+\usepackage{enumitem} 
+
+\setlength{\parindent}{0pt}
+
+\definecolor{destaque}{HTML}{ \VAR{ dados.cor } }
+
+\titleformat{\section}
+{\Large\bfseries\uppercase}
+{}
+{0em}
+{}[\vspace{1mm}\titlerule]
+
+\newcommand{\divider}{\textcolor{gray!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\medskip}
+
+% Formato: Cargo (Data) \n Empresa - Local
+\newcommand{\cvitem}[5]{
+	% Linha 1: Cargo (Data) em Destaque
+	{\large \color{destaque} \textbf{#1} (#4)} \par
+	\vspace{1mm}
+
+	{\textbf{#2} -- #3} \par
+	
+	\vspace{2mm}
+	
+	{
+		\small 
+		\linespread{1.0}\selectfont 
+		#5 
+	}
+	\par\vspace{4mm} 
+}
+
+% Formação:
+\newcommand{\cvitemshort}[4]{
+	{\large \color{destaque} \textbf{#1} (#4)} \par
+	\vspace{1mm}
+	{\textbf{#2} -- #3} \par
+	\vspace{4mm} 
+}
+
+% Configuração de Links
+\usepackage[hidelinks,colorlinks=true,linkcolor=destaque,urlcolor=destaque]{hyperref}
+
+\begin{document}
+	\thispagestyle{empty}
+	
+	% --- CABEÇALHO  ---
+	\begin{center}
+		{\Huge \bf \VAR{ dados.nome }} \\[0.5em]
+		{\Large \VAR{ dados.titulo }} \\[1em]
+		
+		\parbox{0.9\linewidth}{
+			\centering
+			\VAR{ dados.resumo }
+		}
+		
+		\vspace{3mm}
+				
+		\small
+		\href{mailto:\VAR{ dados.email }}{\VAR{ dados.email }} \ | \ 
+		\VAR{ dados.telefone } \ | \ 
+		\VAR{ dados.localizacao } \ | \ 
+		\href{\VAR{ dados.linkedin_link }}{\VAR{ dados.linkedin_texto }}
+	\end{center}
+	
+	\vspace{3mm}
+	
+	% --- EXPERIÊNCIA ---
+	\section*{Experiência Profissional}
+	
+	\BLOCK{ for exp in dados.experiencias }
+	\cvitem{ \VAR{ exp.cargo } }
+	{ \VAR{ exp.empresa } }
+	{ \VAR{ exp.local } }
+	{ \VAR{ exp.periodo } }
+	{ \VAR{ exp.descricao } }
+	
+	\BLOCK{ if not loop.last }
+	\divider
+	\BLOCK{ endif }
+	\BLOCK{ endfor }
+	
+	\vspace{2mm}
+	
+	% --- FORMAÇÃO ---
+	\section*{Formação Acadêmica}
+	
+	\BLOCK{ for form in dados.formacoes }
+	\cvitemshort{ \VAR{ form.curso } }
+	{ \VAR{ form.instituicao } }
+	{ \VAR{ form.local } }
+	{ \VAR{ form.periodo } }
+	
+	\BLOCK{ if not loop.last }
+	\divider
+	\BLOCK{ endif }
+	\BLOCK{ endfor }
+	
+	\vspace{2mm}
+	
+	% --- IDIOMAS ---
+	\section*{Idiomas}
+	\begin{itemize}[noitemsep, topsep=0pt, leftmargin=1.2em]
+		\BLOCK{ for idioma in dados.idiomas }
+		\item \VAR{ idioma }
+		\BLOCK{ endfor }
+	\end{itemize}
+	
+	\vspace{3mm}
+	
+	% --- PROFICIÊNCIAS ---
+	\section*{Proficiências}
+	\begin{itemize}[noitemsep, topsep=0pt, leftmargin=1.2em]
+		\BLOCK{ for skill in dados.skills }
+		\item \VAR{ skill }
+		\BLOCK{ endfor }
+	\end{itemize}
+	
+\end{document}
