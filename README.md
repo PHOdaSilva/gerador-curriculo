@@ -43,7 +43,7 @@ Para rodar este projeto na sua máquina, você precisará do Python e de uma dis
 
 Clone o repositório:
 ```bash
-git clone https://github.com/PHOdaSilva/gerador-curriculo/.git
+git clone https://github.com/PHOdaSilva/gerador-curriculo.git
 cd gerador-curriculo
 ```
 Instale as dependências do Python:
