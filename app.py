@@ -6,7 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 
 # --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(
-    page_title="Gerador de Currículo ATS", 
+    page_title="Gerador de Currículo Profissional", 
     page_icon="📄", 
     layout="wide",
     initial_sidebar_state="expanded"
@@ -291,3 +291,4 @@ with col_main_btn:
 
             except Exception as e:
                 st.error(f"Erro interno: {e}")
+
