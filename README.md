@@ -1,5 +1,6 @@
-# 📄 Gerador de Currículo Profissional (Python + LaTeX)
+# Gerador de Currículo Profissional (Python + LaTeX)
 
+Acesse agora:
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gerador-curriculo.streamlit.app)
 
 Um aplicativo web interativo que gera currículos profissionais em **PDF** usando a precisão tipográfica e aparência sofisticada do **LaTeX**. O modelo foi otimizado para ser **ATS-Friendly** (Applicant Tracking Systems), garantindo que robôs de recrutamento consigam ler os dados corretamente, além de manter um design limpo e elegante para recrutadores humanos.
