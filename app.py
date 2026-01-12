@@ -270,7 +270,7 @@ with col_main_btn:
                     capture_output=True
                 )
 
-                              if os.path.exists(arquivo_pdf):
+                if os.path.exists(arquivo_pdf):
                     st.success("✅ Currículo gerado com sucesso!")
                     with open(arquivo_pdf, "rb") as pdf_file:
                         st.download_button(
@@ -295,5 +295,6 @@ with col_main_btn:
 
             except Exception as e:
                 st.error(f"Erro interno: {e}")
+
 
 
