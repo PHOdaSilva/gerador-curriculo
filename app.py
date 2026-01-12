@@ -262,16 +262,15 @@ with col_main_btn:
                 with open(arquivo_tex, 'w', encoding='utf-8') as f:
                     f.write(latex_renderizado)
 
+                subprocess.run(["pdflatex", "-interaction=nonstopmode", arquivo_tex], capture_output=True)
+                
+           
                 process = subprocess.run(
                     ["pdflatex", "-interaction=nonstopmode", arquivo_tex], 
                     capture_output=True
                 )
 
-                if process.returncode != 0:
-                    st.error("Ops! Ocorreu um erro na criação do PDF.")
-                    with st.expander("Ver detalhes do erro (Logs)"):
-                        st.code(process.stdout.decode('latin-1')[-1500:])
-                else:
+                              if os.path.exists(arquivo_pdf):
                     st.success("✅ Currículo gerado com sucesso!")
                     with open(arquivo_pdf, "rb") as pdf_file:
                         st.download_button(
@@ -282,6 +281,11 @@ with col_main_btn:
                             type="primary",
                             use_container_width=True
                         )
+                else:
+                 
+                    st.error("Ops! Ocorreu um erro na criação do PDF.")
+                    with st.expander("Ver detalhes do erro (Logs)"):
+                        st.code(process.stdout.decode('latin-1')[-1500:])
                 
                 # Limpeza
                 arquivos_para_apagar = [arquivo_tex, arquivo_pdf, f"cv_{session_id}.log", f"cv_{session_id}.aux", f"cv_{session_id}.out"]
@@ -291,4 +295,5 @@ with col_main_btn:
 
             except Exception as e:
                 st.error(f"Erro interno: {e}")
+
 
