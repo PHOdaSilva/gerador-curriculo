@@ -12,7 +12,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- CSS PERSONALIZADO (Visual Pro) ---
+#--- ESTILO DA PÁGINA (melhorar) ---
+
 st.markdown("""
 <style>
     /* Ajuste de espaçamento do título */
@@ -99,7 +100,7 @@ st.subheader("2. 💼 Experiência Profissional")
 st.caption("Liste suas experiências da mais recente para a mais antiga.")
 
 for i in range(st.session_state.num_experiencias):
-    # Container com borda para agrupar cada experiência visualmente
+    
     with st.container(border=True):
         col_header, col_delete = st.columns([8, 1])
         with col_header:
@@ -119,7 +120,7 @@ for i in range(st.session_state.num_experiencias):
         with col_desc:
             st.text_area("Descrição das atividades", key=f"desc_exp_{i}", height=100, placeholder="Descreva suas principais responsabilidades e conquistas...")
 
-# Botões de controle (Adicionar/Remover)
+# Botões de adicionar e remover)
 col_btn_1, col_btn_2, col_vazia = st.columns([2, 2, 4])
 with col_btn_1:
     if st.button("➕ Adicionar Experiência", use_container_width=True):
@@ -176,7 +177,7 @@ st.write("")
 st.write("")
 
 # --- BOTÃO FINAL ---
-# Centralizar o botão de ação
+
 _, col_main_btn, _ = st.columns([1, 2, 1])
 
 with col_main_btn:
@@ -295,6 +296,7 @@ with col_main_btn:
 
             except Exception as e:
                 st.error(f"Erro interno: {e}")
+
 
 
 
