@@ -50,7 +50,7 @@ with st.sidebar:
     st.title("⚙️ Configurações")
     st.markdown("Personalize a aparência do seu documento.")
     
-    cor_escolhida = st.color_picker("Cor de Destaque (Títulos):", "#093967")
+    cor_escolhida = st.color_picker("Cor de Destaque (Títulos):", "#000000")
     
     st.divider()
     
@@ -296,6 +296,7 @@ with col_main_btn:
 
             except Exception as e:
                 st.error(f"Erro interno: {e}")
+
 
 
 
