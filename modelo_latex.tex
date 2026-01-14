@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+
+% --- PACOTES DE TIPOGRAFIA E ESTILO ---
+\usepackage{microtype}      % Melhora o espaçamento das letras
+\usepackage[T1]{fontenc}    % Codificação de fonte
+\usepackage{mathptmx}       % Fonte Times New Roman (Ótima para ATS)
+\usepackage{xcolor}         % Cores
+\usepackage{dashrule}       % Linhas pontilhadas
+\usepackage{titlesec}       % Formatação de títulos
+\usepackage{enumitem}       % Listas personalizadas
+
+% --- CONFIGURAÇÕES GERAIS ---
+\setlength{\parindent}{0pt} % Remove indentação de parágrafo
+
+% DEFINIÇÃO DA COR DE DESTAQUE
+% Mude este código HTML para alterar a cor do currículo, ou deixe em 000000 para tudo preto
+\definecolor{destaque}{HTML}{093967} 
+
+\titleformat{\section}
+{\Large\bfseries\uppercase}
+{}
+{0em}
+{}[\vspace{1mm}\titlerule]
+
+% Linha divisória:
+\newcommand{\divider}{\textcolor{gray!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\medskip}
+
+% --- MACROS ---
+
+% Macro para EXPERIÊNCIA
+% Sintaxe: \cvitem{Cargo}{Empresa}{Local}{Período}{Descrição}
+\newcommand{\cvitem}[5]{
+	% Linha 1: Cargo (Período) em Destaque
+	{\large \color{destaque} \textbf{#1} (#4)} \par
+	\vspace{1mm}
+	
+	% Linha 2: Empresa -- Local
+	{\textbf{#2} -- #3} \par
+	
+	\vspace{2mm}
+	
+	% Descrição das atividades
+	{
+		\small 
+		\linespread{1.0}\selectfont 
+		#5 
+	}
+	\par\vspace{4mm} 
+}
+
+% Macro para FORMAÇÃO
+% Sintaxe: \cvitemshort{Curso}{Instituição}{Local}{Período}
+\newcommand{\cvitemshort}[4]{
+	{\large \color{destaque} \textbf{#1} (#4)} \par
+	\vspace{1mm}
+	{\textbf{#2} -- #3} \par
+	\vspace{4mm} 
+}
+
+\usepackage[hidelinks,colorlinks=true,linkcolor=destaque,urlcolor=destaque]{hyperref}
+
+% --- INÍCIO DO DOCUMENTO ---
+\begin{document}
+	\thispagestyle{empty}
+	
+	% --- CABEÇALHO ---
+	\begin{center}
+		{\Huge \bf MARIA DA SILVA} \\[0.5em]
+		{\Large Engenheira Civil | Gestora de Projetos} \\[1em]
+		
+		% Resumo Profissional
+		\parbox{0.9\linewidth}{
+			\centering
+			Profissional com 5 anos de experiência em gestão de obras residenciais e comerciais. Especialista em otimização de custos e liderança de equipes multidisciplinares. Busco oportunidades para aplicar metodologias ágeis no setor da construção civil.
+		}
+		
+		\vspace{3mm}
+		
+		% Contatos
+		\small
+		\href{mailto:maria.silva@email.com}{maria.silva@email.com} \ | \ 
+		(11) 99999-9999 \ | \ 
+		São Paulo, SP \ | \ 
+		\href{https://linkedin.com/in/mariadasilva}{linkedin.com/in/mariadasilva}
+	\end{center}
+	
+	\vspace{3mm}
+	
+	% --- EXPERIÊNCIA PROFISSIONAL ---
+	\section*{Experiência Profissional}
+	
+	\cvitem{Coordenadora de Obras}
+	{Construtora Exemplo S.A.}
+	{São Paulo, SP}
+	{Jan/2022 -- Atual}
+	{Responsável pelo gerenciamento de 3 canteiros de obras simultâneos. Implementei o uso de software BIM, reduzindo erros de projeto em 15\%. Liderança direta de equipe com 40 colaboradores e gestão de contratos com fornecedores.}
+	
+	\divider
+	
+	\cvitem{Engenheira Trainee}
+	{Engenharia Inovadora Ltda.}
+	{Campinas, SP}
+	{Fev/2019 -- Dez/2021}
+	{Acompanhamento de cronograma físico-financeiro e medições de empreiteiros. Auxiliei na implementação da certificação ISO 9001 no departamento de qualidade.}
+	
+	\vspace{2mm}
+	
+	% --- FORMAÇÃO ACADÊMICA ---
+	\section*{Formação Acadêmica}
+	
+	\cvitemshort{MBA em Gestão de Projetos}
+	{Fundação Getúlio Vargas (FGV)}
+	{São Paulo, SP}
+	{2022 -- 2023}
+	
+	\divider
+	
+	\cvitemshort{Bacharelado em Engenharia Civil}
+	{Universidade de São Paulo (USP)}
+	{São Carlos, SP}
+	{2014 -- 2018}
+	
+	\vspace{2mm}
+	
+	% --- IDIOMAS ---
+	\section*{Idiomas}
+	\begin{itemize}[noitemsep, topsep=0pt, leftmargin=1.2em]
+		\item Inglês Avançado
+		\item Espanhol Intermediário
+	\end{itemize}
+	
+	\vspace{3mm}
+	
+	% --- PROFICIÊNCIAS ---
+	\section*{Proficiências}
+	\begin{itemize}[noitemsep, topsep=0pt, leftmargin=1.2em]
+		\item AutoCAD e Revit (BIM)
+		\item MS Project e Excel Avançado
+		\item Metodologias Ágeis (Scrum/Kanban)
+		\item Liderança de Equipes
+	\end{itemize}
+	
+\end{document}
