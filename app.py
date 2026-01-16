@@ -226,14 +226,14 @@ with col_main_btn:
                 linkedin_link = f"https://{linkedin_link}"
 
             # Adicionado para corrigir o bug do underline no email
-        email_escapado = email.replace("_", "\\_")
-        linkedin_texto = linkedin_texto.replace("_", "\\_") 
+            email_check = email.replace("_", "\\_")
+            linkedin_texto = linkedin_texto.replace("_", "\\_") 
             
             dados = {
                 "cor": cor_latex,
                 "nome": nome,
                 "titulo": titulo,
-                "email": email, 
+                "email": email_check, 
                 "telefone": telefone,
                 "localizacao": localizacao,
                 "linkedin_texto": linkedin_texto,
@@ -300,6 +300,7 @@ with col_main_btn:
 
             except Exception as e:
                 st.error(f"Erro interno: {e}")
+
 
 
 
