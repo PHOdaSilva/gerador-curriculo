@@ -123,12 +123,12 @@ for i in range(st.session_state.num_experiencias):
 # Botões de adicionar e remover)
 col_btn_1, col_btn_2, col_vazia = st.columns([2, 2, 4])
 with col_btn_1:
-    if st.button("➕ Adicionar Experiência", use_container_width=True):
+    if st.button("➕ Adicionar Experiência", use_container_width=True, key="btn_add_exp"):
         st.session_state.num_experiencias += 1
         st.rerun()
 with col_btn_2:
     if st.session_state.num_experiencias > 1:
-        if st.button("🗑️ Remover Última", type="secondary", use_container_width=True):
+       if st.button("🗑️ Remover Última", type="secondary", use_container_width=True, key="btn_del_exp"):
             st.session_state.num_experiencias -= 1
             st.rerun()
 
@@ -150,12 +150,12 @@ for i in range(st.session_state.num_formacoes):
 
 col_btn_f1, col_btn_f2, col_vazia_f = st.columns([2, 2, 4])
 with col_btn_f1:
-    if st.button("➕ Adicionar Formação", use_container_width=True):
+    if st.button("➕ Adicionar Formação", use_container_width=True, key="btn_add_form"):
         st.session_state.num_formacoes += 1
         st.rerun()
 with col_btn_f2:
     if st.session_state.num_formacoes > 1:
-        if st.button("🗑️ Remover Última", type="secondary", use_container_width=True):
+       if st.button("🗑️ Remover Última", type="secondary", use_container_width=True, key="btn_del_form"):
             st.session_state.num_formacoes -= 1
             st.rerun()
 
@@ -300,6 +300,7 @@ with col_main_btn:
 
             except Exception as e:
                 st.error(f"Erro interno: {e}")
+
 
 
 
